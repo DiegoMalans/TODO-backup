@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Item } from "./item";
 import { ItemComponent } from "./item/item.component";
-
+import { ChosenListService } from './chosen-list.service'; 
 
 @Component({
   standalone: true,
@@ -16,9 +16,11 @@ export class AppComponent implements OnInit {
   componenquestion = "What would you like to do today?"
   filter: "all" | "active" | "done" = "all";
   public choosenlist?: number;
-
   allItems: Item[] = [];
   title: any;
+
+  constructor(private chosenListService: ChosenListService) {}
+  
   ngOnInit() {
     this.loadItems(this.choosenlist);
   }
@@ -104,7 +106,18 @@ export class AppComponent implements OnInit {
   addComment(item: Item, comment: string) {
     if (!comment) return;
     item.comments.push(comment);
-    this.saveItems(1);
+
+    if (this.choosenlist == 1) {
+      this.saveItems(1);
+    } else if (this.choosenlist == 2) {
+      this.saveItems(2);
+    } else if (this.choosenlist == 3) {
+      this.saveItems(3);
+    } else if (this.choosenlist == 4) {
+      this.saveItems(4);
+    } else if (this.choosenlist == 5) {
+      this.saveItems(5);
+    }
   }
 
   get items() {
