@@ -23,30 +23,18 @@ export class AppComponent implements OnInit {
     this.loadItems(this.choosenlist);
   }
 
-  stylechanger(choos: number) {
-    const element1 = document.getElementById('days-button1');
-    const element2 = document.getElementById('days-button2');
-    const element3 = document.getElementById('days-button3');
-    const element4 = document.getElementById('days-button4');
-    const element5 = document.getElementById('days-button5');
-    if (choos == 1) {
-    element1!.style.color = "#000";
-    element1!.style.backgroundColor = "#d7ecff";
-    } else if (choos == 2) {
-    element2!.style.color = "#000";
-    element2!.style.backgroundColor = "#d7ecff";
-    } else if (choos == 3) {
-    element3!.style.color = "#000";
-    element3!.style.backgroundColor = "#d7ecff";
-    } else if (choos == 4) {
-    element4!.style.color = "#000";
-    element4!.style.backgroundColor = "#d7ecff";
-    } else if (choos == 5) {
-    element5!.style.color = "#000";
-    element5!.style.backgroundColor = "#d7ecff";
-    }
-  }
+   stylechanger(choos: number) {
+    const buttonIds = ['days-button1', 'days-button2', 'days-button3', 'days-button4', 'days-button5'];
+  
+    buttonIds.forEach((id, index) => {
+      const element = document.getElementById(id);
+      if (element) {
 
+        element.style.backgroundColor = (index + 1 === choos) ? "#d7ecff" : "#000";
+      }
+    });
+  }
+  
   selectList(choos: number) {
     if (choos == 1) {
       this.choosenlist = 1;
@@ -69,12 +57,14 @@ export class AppComponent implements OnInit {
   addItem(description: string) {
     if (!description) return;
 
-    this.allItems.unshift({
-      description,
-      done: false,
-      comments: [],
-    });
-
+    if (this.choosenlist != null) {
+      this.allItems.unshift({
+        description,
+        done: false,
+        comments: [],
+      });
+    }
+    
     if (this.choosenlist == 1) {
       this.saveItems(1);
     } else if (this.choosenlist == 2) {
@@ -85,13 +75,30 @@ export class AppComponent implements OnInit {
       this.saveItems(4);
     } else if (this.choosenlist == 5) {
       this.saveItems(5);
+    } else {
+      alert("Sie müssen zuerst eine Liste auswählen!")
     }
 
   }
 
   remove(item: Item) {
-    this.allItems.splice(this.allItems.indexOf(item), 1);
-    this.saveItems(1);
+    
+    if (this.choosenlist == 1) {
+      this.allItems.splice(this.allItems.indexOf(item), 1);
+      this.saveItems(1);
+    } else if (this.choosenlist == 2) {
+      this.allItems.splice(this.allItems.indexOf(item), 1);
+      this.saveItems(2);
+    } else if (this.choosenlist == 3) {
+      this.allItems.splice(this.allItems.indexOf(item), 1);
+      this.saveItems(3);
+    } else if (this.choosenlist == 4) {
+      this.allItems.splice(this.allItems.indexOf(item), 1);
+      this.saveItems(4);
+    } else if (this.choosenlist == 5) {
+      this.allItems.splice(this.allItems.indexOf(item), 1);
+      this.saveItems(5);
+    }
   }
 
   addComment(item: Item, comment: string) {
