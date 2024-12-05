@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
   addItem(description: string) {
     if (!description) return;
 
-    if (this.choositem != null) {
+    if (this.choositem != 0) {
       this.allItems.unshift({
         description,
         done: false,
