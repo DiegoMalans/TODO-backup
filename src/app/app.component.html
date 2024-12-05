@@ -23,7 +23,7 @@
 
   <ul>
     <li *ngFor="let i of items">
-      <app-item (remove)="remove(i)" [item]="i"></app-item>
+      <app-item (remove)="remove(i)" [choositem]="choositem" [item]="i"></app-item>
       <div class="comments-section">
         <h3>Comments</h3>
         <ul>
