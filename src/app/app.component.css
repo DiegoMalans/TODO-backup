@@ -82,3 +82,14 @@
   .comments-section button {
     padding: 5px 10px;
   }
+
+  #buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.8%;
+  }
+
+  #adddeletebuttons {
+    font-weight: 900;
+  }

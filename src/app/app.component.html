@@ -2,10 +2,14 @@
   <h1>{{ componentTitle }}</h1>
   <label for="addItemInput">{{componenquestion}}</label>
   <button id="days-button1" class="days-button" (click)="selectList(1)" (click)="stylechanger(1)">Liste 1</button>
-  <button id="days-button2" class="days-button" (click)="selectList(2)" (click)="stylechanger(2)">Liste 2</button>
-  <button id="days-button3" class="days-button" (click)="selectList(3)" (click)="stylechanger(3)">Liste 3</button>
-  <button id="days-button4" class="days-button" (click)="selectList(4)" (click)="stylechanger(4)">Liste 4</button>
-  <button id="days-button5" class="days-button" (click)="selectList(5)" (click)="stylechanger(5)">Liste 5</button>
+  <button *ngIf="addbuttons" id="days-button2" class="days-button" (click)="selectList(2)" (click)="stylechanger(2)">Liste 2</button>
+  <button *ngIf="addbuttons" id="days-button3" class="days-button" (click)="selectList(3)" (click)="stylechanger(3)">Liste 3</button>
+  <button *ngIf="addbuttons" id="days-button4" class="days-button" (click)="selectList(4)" (click)="stylechanger(4)">Liste 4</button>
+  <button *ngIf="addbuttons" id="days-button5" class="days-button" (click)="selectList(5)" (click)="stylechanger(5)">Liste 5</button>
+  <div id="buttons-container">
+    <button><i id="adddeletebuttons" class="fas fa-plus"></i></button>
+    <button><i id="adddeletebuttons" class="fas fa-minus"></i></button>
+  </div>
   <input
     #newItem
     placeholder="add an item"

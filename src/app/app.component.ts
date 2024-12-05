@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   title: any;
   choositem: number = 0;
   startpage: boolean = true;
+  addbuttons: boolean = false;
   @ViewChild('newItem') newItemInput!: ElementRef;
 
   ngOnInit() {
