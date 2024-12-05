@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Item } from "./item";
 import { ItemComponent } from "./item/item.component";
+import {  ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
   allItems: Item[] = [];
   title: any;
   choositem: number = 0;
- 
+  @ViewChild('newItem') newItemInput!: ElementRef;
+
   ngOnInit() {
     this.loadItems(this.choositem);
   }
@@ -66,16 +68,22 @@ export class AppComponent implements OnInit {
 
     if (this.choositem == 1) {
       this.saveItems(1);
+      this.newItemInput.nativeElement.value = '';
     } else if (this.choositem == 2) {
       this.saveItems(2);
+      this.newItemInput.nativeElement.value = '';
     } else if (this.choositem == 3) {
       this.saveItems(3);
+      this.newItemInput.nativeElement.value = '';
     } else if (this.choositem == 4) {
       this.saveItems(4);
+      this.newItemInput.nativeElement.value = '';
     } else if (this.choositem == 5) {
       this.saveItems(5);
+      this.newItemInput.nativeElement.value = '';
     } else {
       alert("Sie müssen zuerst eine Liste auswählen!")
+      this.newItemInput.nativeElement.value = '';
     }
 
   }
