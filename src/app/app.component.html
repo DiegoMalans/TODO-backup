@@ -23,8 +23,8 @@
 
   <ul>
     <li *ngFor="let i of items">
-      <app-item (remove)="remove(i)" [choositem]="choositem" [item]="i"></app-item>
-      <div class="comments-section">
+      <app-item *ngIf="startpage" (remove)="remove(i)" [choositem]="choositem" [item]="i"></app-item>
+      <div *ngIf="startpage" class="comments-section">
         <h3>Comments</h3>
         <ul>
           <li *ngFor="let comment of i.comments">{{ comment }}</li>

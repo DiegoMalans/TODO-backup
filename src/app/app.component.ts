@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Item } from "./item";
 import { ItemComponent } from "./item/item.component";
-import {  ViewChild, ElementRef } from '@angular/core';
+import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -18,15 +18,16 @@ export class AppComponent implements OnInit {
   allItems: Item[] = [];
   title: any;
   choositem: number = 0;
+  startpage: boolean = true;
   @ViewChild('newItem') newItemInput!: ElementRef;
 
   ngOnInit() {
     this.loadItems(this.choositem);
   }
-  
-   stylechanger(choos: number) {
+
+  stylechanger(choos: number) {
     const buttonIds = ['days-button1', 'days-button2', 'days-button3', 'days-button4', 'days-button5'];
-  
+
     buttonIds.forEach((id, index) => {
       const element = document.getElementById(id);
       if (element) {
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
       }
     });
   }
-  
+
   selectList(choos: number) {
     if (choos == 1) {
       this.choositem = 1;
@@ -89,7 +90,7 @@ export class AppComponent implements OnInit {
   }
 
   remove(item: Item) {
-    
+
     if (this.choositem == 1) {
       this.allItems.splice(this.allItems.indexOf(item), 1);
       this.saveItems(1);
@@ -159,18 +160,34 @@ export class AppComponent implements OnInit {
     const storedItemsList3 = localStorage.getItem('todo-items-list-3');
     const storedItemsList4 = localStorage.getItem('todo-items-list-4');
     const storedItemsList5 = localStorage.getItem('todo-items-list-5');
-    if (storedItemsList1 && choos == 1 ) {
+
+    if (storedItemsList1 && choos == 1) {
       this.allItems = JSON.parse(storedItemsList1);
+      this.startpage = true;
     } else if (storedItemsList2 && choos == 2) {
       this.allItems = JSON.parse(storedItemsList2);
+      this.startpage = true;
     } else if (storedItemsList3 && choos == 3) {
       this.allItems = JSON.parse(storedItemsList3);
+      this.startpage = true;
     } else if (storedItemsList4 && choos == 4) {
       this.allItems = JSON.parse(storedItemsList4);
+      this.startpage = true;
     } else if (storedItemsList5 && choos == 5) {
       this.allItems = JSON.parse(storedItemsList5);
-    }else{
+      this.startpage = true;
+    } else if (choos == 0) {
+      this.startpage = false;
+      this.allItems = [
+        ...(storedItemsList1 ? JSON.parse(storedItemsList1) : []),
+        ...(storedItemsList2 ? JSON.parse(storedItemsList2) : []),
+        ...(storedItemsList3 ? JSON.parse(storedItemsList3) : []),
+        ...(storedItemsList4 ? JSON.parse(storedItemsList4) : []),
+        ...(storedItemsList5 ? JSON.parse(storedItemsList5) : [])
+      ];
+    } else {
       this.allItems = [];
     }
   }
+
 }
