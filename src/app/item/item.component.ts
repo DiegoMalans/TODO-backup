@@ -15,12 +15,12 @@ export class ItemComponent {
   @Output() remove = new EventEmitter<Item>();
   @Input() choositem!: number;
 
-  onCheckboxChange(item: any): void {
+  onCheckboxChange(item: any) {
     item.done = !item.done;
     this.saveItem(item.description, item.done);
   }
 
-  saveItem(description: string, done: boolean): void {
+  saveItem(description: string, done: boolean) {
     if (!description) return;
     this.editable = false;
     let allItems: Item[] = [];
