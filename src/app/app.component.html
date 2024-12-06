@@ -1,28 +1,34 @@
 <div class="main">
   <h1>{{ componentTitle }}</h1>
   <label for="addItemInput">{{componenquestion}}</label>
-  <button *ngIf="addbuttons1" id="days-button1" class="days-button" (click)="selectList(1)" (click)="stylechanger(1)">{{ listName1 }} {{ listValues1 }}</button>
-  <button *ngIf="addbuttons2" id="days-button2" class="days-button" (click)="selectList(2)" (click)="stylechanger(2)">{{ listName2 }} {{ listValues2 }}</button>
-  <button *ngIf="addbuttons3" id="days-button3" class="days-button" (click)="selectList(3)" (click)="stylechanger(3)">{{ listName3 }} {{ listValues3 }}</button>
-  <button *ngIf="addbuttons4" id="days-button4" class="days-button" (click)="selectList(4)" (click)="stylechanger(4)">{{ listName4 }} {{ listValues4 }}</button>
-  <button *ngIf="addbuttons5" id="days-button5" class="days-button" (click)="selectList(5)" (click)="stylechanger(5)">{{ listName5 }} {{ listValues5 }}</button>
+  @if(addbuttons1){
+  <button id="days-button1" class="days-button" (click)="selectList(1)" (click)="stylechanger(1)">{{
+    listName1 }} {{ listValues1 }}</button>
+  }
+  <button *ngIf="addbuttons2" id="days-button2" class="days-button" (click)="selectList(2)" (click)="stylechanger(2)">{{
+    listName2 }} {{ listValues2 }}</button>
+  <button *ngIf="addbuttons3" id="days-button3" class="days-button" (click)="selectList(3)" (click)="stylechanger(3)">{{
+    listName3 }} {{ listValues3 }}</button>
+  <button *ngIf="addbuttons4" id="days-button4" class="days-button" (click)="selectList(4)" (click)="stylechanger(4)">{{
+    listName4 }} {{ listValues4 }}</button>
+  <button *ngIf="addbuttons5" id="days-button5" class="days-button" (click)="selectList(5)" (click)="stylechanger(5)">{{
+    listName5 }} {{ listValues5 }}</button>
   <div id="buttons-container">
-    <button><i class="adddeletebuttons" class="fas fa-plus"  (click)="addButton()" ></i></button>
-    <button><i class="adddeletebuttons" class="fas fa-minus" (click)="deleteButton()" ></i></button>
+    <button (click)="addButton()"><i class="adddeletebuttons" class="fas fa-plus"></i></button>
+    <button (click)="deleteButton()"><i class="adddeletebuttons" class="fas fa-minus"></i></button>
   </div>
-  <input
-    #newItem
-    placeholder="add an item"
-    (keyup.enter)="addItem(newItem.value); newItem.value = ''"
-    class="lg-text-input"
-    id="addItemInput" />
+  <input #newItem placeholder="add an item" (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+    class="lg-text-input" id="addItemInput" />
 
   <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
-  
+
   <h2>
     {{items.length}}
-    <span *ngIf="items.length === 1; else elseBlock">item</span>
-    <ng-template #elseBlock>items</ng-template>
+    @if(items.length === 1){
+    <span>item</span>
+    } @else {
+    <span>items</span>
+    }
   </h2>
 
   <ul>
@@ -33,7 +39,8 @@
         <ul>
           <li *ngFor="let comment of i.comments">{{ comment }}</li>
         </ul>
-        <input #newComment placeholder="add a comment" (keyup.enter)="addComment(i, newComment.value); newComment.value = ''" />
+        <input #newComment placeholder="add a comment"
+          (keyup.enter)="addComment(i, newComment.value); newComment.value = ''" />
         <button (click)="addComment(i, newComment.value); newComment.value = ''">Add Comment</button>
       </div>
     </li>

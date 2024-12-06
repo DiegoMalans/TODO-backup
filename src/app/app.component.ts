@@ -66,8 +66,8 @@ export class AppComponent implements OnInit {
       } else {
         this.listName1 = "";
       }
-      this.buttonNumber++;
       localStorage.setItem('todo-items-list-1', JSON.stringify([]));
+      this.buttonNumber++;
     } else if (this.buttonNumber == 1) {
       this.addbuttons2 = true;
       const popupValue2: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
@@ -77,8 +77,8 @@ export class AppComponent implements OnInit {
       } else {
         this.listName2 = "";
       }
-      this.buttonNumber++;
       localStorage.setItem('todo-items-list-2', JSON.stringify([]));
+      this.buttonNumber++;
     } else if (this.buttonNumber == 2) {
       this.addbuttons3 = true;
       const popupValue3: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
@@ -88,8 +88,8 @@ export class AppComponent implements OnInit {
       } else {
         this.listName2 = "";
       }
-      this.buttonNumber++;
       localStorage.setItem('todo-items-list-3', JSON.stringify([]));
+      this.buttonNumber++;
     } else if (this.buttonNumber == 3) {
       this.addbuttons4 = true;
       const popupValue4: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
@@ -99,8 +99,8 @@ export class AppComponent implements OnInit {
       } else {
         this.listName4 = "";
       }
-      this.buttonNumber++;
       localStorage.setItem('todo-items-list-4', JSON.stringify([]));
+      this.buttonNumber++;
     } else if (this.buttonNumber == 4) {
       this.addbuttons5 = true;
       const popupValue5: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
@@ -110,8 +110,8 @@ export class AppComponent implements OnInit {
       } else {
         this.listName5 = "";
       }
-      this.buttonNumber++;
       localStorage.setItem('todo-items-list-5', JSON.stringify([]));
+      this.buttonNumber++;
     }
   }
 
@@ -120,26 +120,31 @@ export class AppComponent implements OnInit {
       localStorage.removeItem('todo-items-list-1');
       this.loadItems(this.choositem);
       this.addbuttons1 = false;
+      this.choositem = 0;
       localStorage.removeItem("list-name-1")
     } else if (this.choositem == 2) {
       localStorage.removeItem('todo-items-list-2');
       this.loadItems(this.choositem);
       this.addbuttons2 = false;
+      this.choositem = 0;
       localStorage.removeItem("list-name-2")
     } else if (this.choositem == 3) {
       localStorage.removeItem('todo-items-list-3');
       this.loadItems(this.choositem);
       this.addbuttons3 = false;
+      this.choositem = 0;
       localStorage.removeItem("list-name-3")
     } else if (this.choositem == 4) {
       localStorage.removeItem('todo-items-list-4');
       this.loadItems(this.choositem);
       this.addbuttons4 = false;
+      this.choositem = 0;
       localStorage.removeItem("list-name-4")
     } else if (this.choositem == 5) {
       localStorage.removeItem('todo-items-list-5');
       this.loadItems(this.choositem);
       this.addbuttons5 = false;
+      this.choositem = 0;
       localStorage.removeItem("list-name-5")
     } else {
 
