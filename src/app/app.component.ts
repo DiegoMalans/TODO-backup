@@ -15,7 +15,11 @@ export class AppComponent implements OnInit {
   componentTitle = "My To Do List";
   componenquestion = "What would you like to do today?"
   filter: "all" | "active" | "done" = "all";
-  listName: string = ""
+  listName1: string = "";
+  listName2: string = "";
+  listName3: string = "";
+  listName4: string = "";
+  listName5: string = "";
   listValues1: string = "0";
   listValues2: string = "0";
   listValues3: string = "0";
@@ -25,6 +29,7 @@ export class AppComponent implements OnInit {
   title: any;
   choositem: number = 0;
   startpage: boolean = true;
+  addbuttons1: boolean = false;
   addbuttons2: boolean = false;
   addbuttons3: boolean = false;
   addbuttons4: boolean = false;
@@ -50,38 +55,77 @@ export class AppComponent implements OnInit {
   }
 
   addButton() {
-    this.buttonNumber++;
-
-    if (this.buttonNumber === 1) {
+    if (this.buttonNumber == 0) {
+      this.addbuttons1 = true;
+      const popupValue1: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
+      if (popupValue1 !== null) {
+        this.listName1 = popupValue1;
+      } else {
+        this.listName1 = "";
+      }
+      this.buttonNumber++;
+      localStorage.setItem('todo-items-list-1', JSON.stringify([]));
+    } else if (this.buttonNumber == 1) {
       this.addbuttons2 = true;
-      console.log(this.buttonNumber);
-    } else if (this.buttonNumber === 2) {
+      const popupValue2: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
+      if (popupValue2 !== null) {
+        this.listName2 = popupValue2;
+      } else {
+        this.listName2 = "";
+      }
+      this.buttonNumber++;
+      localStorage.setItem('todo-items-list-2', JSON.stringify([]));
+    } else if (this.buttonNumber == 2) {
       this.addbuttons3 = true;
-      console.log(this.buttonNumber);
-    } else if (this.buttonNumber === 3) {
+      const popupValue3: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
+      if (popupValue3 !== null) {
+        this.listName3 = popupValue3;
+      } else {
+        this.listName2 = "";
+      }
+      this.buttonNumber++;
+      localStorage.setItem('todo-items-list-3', JSON.stringify([]));
+    } else if (this.buttonNumber == 3) {
       this.addbuttons4 = true;
-      console.log(this.buttonNumber);
-    } else if (this.buttonNumber === 4) {
+      const popupValue4: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
+      if (popupValue4 !== null) {
+        this.listName4 = popupValue4;
+      } else {
+        this.listName4 = "";
+      }
+      this.buttonNumber++;
+      localStorage.setItem('todo-items-list-4', JSON.stringify([]));
+    } else if (this.buttonNumber == 4) {
       this.addbuttons5 = true;
-      console.log(this.buttonNumber);
+      const popupValue5: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
+      if (popupValue5 !== null) {
+        this.listName5 = popupValue5;
+      } else {
+        this.listName5 = "";
+      }
+      this.buttonNumber++;
+      localStorage.setItem('todo-items-list-5', JSON.stringify([]));
     }
   }
 
   deleteButton() {
-    this.buttonNumber--;
-
-    if (this.buttonNumber === 4) {
+    if (this.choositem == 1) {
+      localStorage.removeItem('todo-items-list-1');
+      this.addbuttons1 = false;
+    } else if (this.choositem == 2) {
+      localStorage.removeItem('todo-items-list-2');
       this.addbuttons2 = false;
-      console.log(this.buttonNumber);
-    } else if (this.buttonNumber === 3) {
+    } else if (this.choositem == 3) {
+      localStorage.removeItem('todo-items-list-3');
       this.addbuttons3 = false;
-      console.log(this.buttonNumber);
-    } else if (this.buttonNumber === 2) {
+    } else if (this.choositem == 4) {
+      localStorage.removeItem('todo-items-list-4');
       this.addbuttons4 = false;
-      console.log(this.buttonNumber);
-    } else if (this.buttonNumber === 1) {
+    } else if (this.choositem == 5) {
+      localStorage.removeItem('todo-items-list-5');
       this.addbuttons5 = false;
-      console.log(this.buttonNumber);
+    } else {
+
     }
   }
 
@@ -105,26 +149,26 @@ export class AppComponent implements OnInit {
   }
 
   showListValue() {
-      const storedItemsList1 = localStorage.getItem('todo-items-list-1');
-      const parsedList = storedItemsList1 ? JSON.parse(storedItemsList1) : [];
-      const numberOfItems = parsedList.length;
-      this.listValues1 = "[" + numberOfItems + "]";
-      const storedItemsList2 = localStorage.getItem('todo-items-list-2');
-      const parsedList2 = storedItemsList2 ? JSON.parse(storedItemsList2) : [];
-      const numberOfItems2 = parsedList2.length;
-      this.listValues2 = "[" + numberOfItems2 + "]";
-      const storedItemsList3 = localStorage.getItem('todo-items-list-3');
-      const parsedList3 = storedItemsList3 ? JSON.parse(storedItemsList3) : [];
-      const numberOfItems3 = parsedList3.length;
-      this.listValues3 = "[" + numberOfItems3 + "]";
-      const storedItemsList4 = localStorage.getItem('todo-items-list-4');
-      const parsedList4 = storedItemsList4 ? JSON.parse(storedItemsList4) : [];
-      const numberOfItems4 = parsedList4.length;
-      this.listValues4 = "[" + numberOfItems4 + "]";
-      const storedItemsList5 = localStorage.getItem('todo-items-list-5');
-      const parsedList5 = storedItemsList5 ? JSON.parse(storedItemsList5) : [];
-      const numberOfItems5 = parsedList5.length;
-      this.listValues5 = "[" + numberOfItems5 + "]";
+    const storedItemsList1 = localStorage.getItem('todo-items-list-1');
+    const parsedList = storedItemsList1 ? JSON.parse(storedItemsList1) : [];
+    const numberOfItems = parsedList.length;
+    this.listValues1 = "[" + numberOfItems + "]";
+    const storedItemsList2 = localStorage.getItem('todo-items-list-2');
+    const parsedList2 = storedItemsList2 ? JSON.parse(storedItemsList2) : [];
+    const numberOfItems2 = parsedList2.length;
+    this.listValues2 = "[" + numberOfItems2 + "]";
+    const storedItemsList3 = localStorage.getItem('todo-items-list-3');
+    const parsedList3 = storedItemsList3 ? JSON.parse(storedItemsList3) : [];
+    const numberOfItems3 = parsedList3.length;
+    this.listValues3 = "[" + numberOfItems3 + "]";
+    const storedItemsList4 = localStorage.getItem('todo-items-list-4');
+    const parsedList4 = storedItemsList4 ? JSON.parse(storedItemsList4) : [];
+    const numberOfItems4 = parsedList4.length;
+    this.listValues4 = "[" + numberOfItems4 + "]";
+    const storedItemsList5 = localStorage.getItem('todo-items-list-5');
+    const parsedList5 = storedItemsList5 ? JSON.parse(storedItemsList5) : [];
+    const numberOfItems5 = parsedList5.length;
+    this.listValues5 = "[" + numberOfItems5 + "]";
   }
 
   addItem(description: string) {
