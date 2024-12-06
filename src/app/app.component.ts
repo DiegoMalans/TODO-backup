@@ -40,6 +40,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.loadItems(this.choositem);
     this.showListValue();
+    this.loadLists();
+    this. loadNames();
   }
 
   stylechanger(choos: number) {
@@ -60,6 +62,7 @@ export class AppComponent implements OnInit {
       const popupValue1: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
       if (popupValue1 !== null) {
         this.listName1 = popupValue1;
+        localStorage.setItem("list-name-1", popupValue1);
       } else {
         this.listName1 = "";
       }
@@ -70,6 +73,7 @@ export class AppComponent implements OnInit {
       const popupValue2: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
       if (popupValue2 !== null) {
         this.listName2 = popupValue2;
+        localStorage.setItem("list-name-2", popupValue2);
       } else {
         this.listName2 = "";
       }
@@ -80,6 +84,7 @@ export class AppComponent implements OnInit {
       const popupValue3: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
       if (popupValue3 !== null) {
         this.listName3 = popupValue3;
+        localStorage.setItem("list-name-3", popupValue3);
       } else {
         this.listName2 = "";
       }
@@ -90,6 +95,7 @@ export class AppComponent implements OnInit {
       const popupValue4: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
       if (popupValue4 !== null) {
         this.listName4 = popupValue4;
+        localStorage.setItem("list-name-4", popupValue4);
       } else {
         this.listName4 = "";
       }
@@ -100,6 +106,7 @@ export class AppComponent implements OnInit {
       const popupValue5: string | null = prompt("Bitte gib den Namen der neuen Liste ein.");
       if (popupValue5 !== null) {
         this.listName5 = popupValue5;
+        localStorage.setItem("list-name-5", popupValue5);
       } else {
         this.listName5 = "";
       }
@@ -111,19 +118,29 @@ export class AppComponent implements OnInit {
   deleteButton() {
     if (this.choositem == 1) {
       localStorage.removeItem('todo-items-list-1');
+      this.loadItems(this.choositem);
       this.addbuttons1 = false;
+      localStorage.removeItem("list-name-1")
     } else if (this.choositem == 2) {
       localStorage.removeItem('todo-items-list-2');
+      this.loadItems(this.choositem);
       this.addbuttons2 = false;
+      localStorage.removeItem("list-name-2")
     } else if (this.choositem == 3) {
       localStorage.removeItem('todo-items-list-3');
+      this.loadItems(this.choositem);
       this.addbuttons3 = false;
+      localStorage.removeItem("list-name-3")
     } else if (this.choositem == 4) {
       localStorage.removeItem('todo-items-list-4');
+      this.loadItems(this.choositem);
       this.addbuttons4 = false;
+      localStorage.removeItem("list-name-4")
     } else if (this.choositem == 5) {
       localStorage.removeItem('todo-items-list-5');
+      this.loadItems(this.choositem);
       this.addbuttons5 = false;
+      localStorage.removeItem("list-name-5")
     } else {
 
     }
@@ -267,6 +284,39 @@ export class AppComponent implements OnInit {
     } else if (choos == 5) {
       localStorage.setItem('todo-items-list-5', JSON.stringify(this.allItems));
       this.loadItems(this.choositem);
+    }
+  }
+
+  loadLists() {
+    for (let i = 1; i <= 5; i++) {
+      const item = localStorage.getItem(`todo-items-list-${i}`);
+      if (item !== null) {
+        (this as any)[`addbuttons${i}`] = true;
+      }
+    }
+  }
+
+  loadNames() {
+    const name1 = localStorage.getItem(`list-name-1`)
+    const name2 = localStorage.getItem(`list-name-2`)
+    const name3 = localStorage.getItem(`list-name-3`)
+    const name4 = localStorage.getItem(`list-name-4`)
+    const name5 = localStorage.getItem(`list-name-5`)
+    
+    if (name1 !== null) {
+      this.listName1 = name1;
+    } 
+    if (name2 !== null) {
+      this.listName2 = name2;
+    }
+    if (name3 !== null) {
+      this.listName3 = name3;
+    } 
+    if (name4 !== null) {
+      this.listName4 = name4;
+    }
+    if (name5 !== null) {
+      this.listName5 = name5;
     }
   }
 
