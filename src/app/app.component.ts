@@ -15,15 +15,26 @@ export class AppComponent implements OnInit {
   componentTitle = "My To Do List";
   componenquestion = "What would you like to do today?"
   filter: "all" | "active" | "done" = "all";
+  listName: string = ""
+  listValues1: string = "0";
+  listValues2: string = "0";
+  listValues3: string = "0";
+  listValues4: string = "0";
+  listValues5: string = "0";
   allItems: Item[] = [];
   title: any;
   choositem: number = 0;
   startpage: boolean = true;
-  addbuttons: boolean = false;
+  addbuttons2: boolean = false;
+  addbuttons3: boolean = false;
+  addbuttons4: boolean = false;
+  addbuttons5: boolean = false;
+  buttonNumber: number = 0;
   @ViewChild('newItem') newItemInput!: ElementRef;
 
   ngOnInit() {
     this.loadItems(this.choositem);
+    this.showListValue();
   }
 
   stylechanger(choos: number) {
@@ -36,6 +47,42 @@ export class AppComponent implements OnInit {
         element.style.backgroundColor = (index + 1 === choos) ? "#d7ecff" : "#000";
       }
     });
+  }
+
+  addButton() {
+    this.buttonNumber++;
+
+    if (this.buttonNumber === 1) {
+      this.addbuttons2 = true;
+      console.log(this.buttonNumber);
+    } else if (this.buttonNumber === 2) {
+      this.addbuttons3 = true;
+      console.log(this.buttonNumber);
+    } else if (this.buttonNumber === 3) {
+      this.addbuttons4 = true;
+      console.log(this.buttonNumber);
+    } else if (this.buttonNumber === 4) {
+      this.addbuttons5 = true;
+      console.log(this.buttonNumber);
+    }
+  }
+
+  deleteButton() {
+    this.buttonNumber--;
+
+    if (this.buttonNumber === 4) {
+      this.addbuttons2 = false;
+      console.log(this.buttonNumber);
+    } else if (this.buttonNumber === 3) {
+      this.addbuttons3 = false;
+      console.log(this.buttonNumber);
+    } else if (this.buttonNumber === 2) {
+      this.addbuttons4 = false;
+      console.log(this.buttonNumber);
+    } else if (this.buttonNumber === 1) {
+      this.addbuttons5 = false;
+      console.log(this.buttonNumber);
+    }
   }
 
   selectList(choos: number) {
@@ -55,6 +102,29 @@ export class AppComponent implements OnInit {
       this.choositem = 5;
       this.loadItems(5);
     }
+  }
+
+  showListValue() {
+      const storedItemsList1 = localStorage.getItem('todo-items-list-1');
+      const parsedList = storedItemsList1 ? JSON.parse(storedItemsList1) : [];
+      const numberOfItems = parsedList.length;
+      this.listValues1 = "[" + numberOfItems + "]";
+      const storedItemsList2 = localStorage.getItem('todo-items-list-2');
+      const parsedList2 = storedItemsList2 ? JSON.parse(storedItemsList2) : [];
+      const numberOfItems2 = parsedList2.length;
+      this.listValues2 = "[" + numberOfItems2 + "]";
+      const storedItemsList3 = localStorage.getItem('todo-items-list-3');
+      const parsedList3 = storedItemsList3 ? JSON.parse(storedItemsList3) : [];
+      const numberOfItems3 = parsedList3.length;
+      this.listValues3 = "[" + numberOfItems3 + "]";
+      const storedItemsList4 = localStorage.getItem('todo-items-list-4');
+      const parsedList4 = storedItemsList4 ? JSON.parse(storedItemsList4) : [];
+      const numberOfItems4 = parsedList4.length;
+      this.listValues4 = "[" + numberOfItems4 + "]";
+      const storedItemsList5 = localStorage.getItem('todo-items-list-5');
+      const parsedList5 = storedItemsList5 ? JSON.parse(storedItemsList5) : [];
+      const numberOfItems5 = parsedList5.length;
+      this.listValues5 = "[" + numberOfItems5 + "]";
   }
 
   addItem(description: string) {
@@ -87,7 +157,7 @@ export class AppComponent implements OnInit {
       alert("Sie müssen zuerst eine Liste auswählen!")
       this.newItemInput.nativeElement.value = '';
     }
-
+    this.showListValue();
   }
 
   remove(item: Item) {
@@ -108,6 +178,7 @@ export class AppComponent implements OnInit {
       this.allItems.splice(this.allItems.indexOf(item), 1);
       this.saveItems(5);
     }
+    this.showListValue();
   }
 
   addComment(item: Item, comment: string) {
